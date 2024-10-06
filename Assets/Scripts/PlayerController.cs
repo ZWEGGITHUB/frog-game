@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public GameObject powerupEffect;
     public GameObject hitEffect;
 
+    private Vector3 originalScale;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         theRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        originalScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -78,6 +81,15 @@ public class PlayerController : MonoBehaviour
             jumpSound.Play();
         } else {
             //theRB.velocity = new Vector2(theRB.velocity.x, 0);
+        }
+
+        if (theRB.velocity.x > 0)
+        {
+            transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
+        }
+        else if (theRB.velocity.x < 0)
+        {
+            transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z);
         }
         
         horizontal = Input.GetAxisRaw("Horizontal");

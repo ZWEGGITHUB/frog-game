@@ -10,8 +10,6 @@ public class Bullet : MonoBehaviour
 
     public bool inverse;
 
-    public GameObject bulletEffect;
-
     // Start is called before the first frame update
     void Start()
     {
