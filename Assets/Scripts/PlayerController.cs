@@ -39,9 +39,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FlashScript fl;
     public GameObject powerupEffect;
     public GameObject hitEffect;
-
+    public GameObject win;
     private Vector3 originalScale;
-
 
     // Start is called before the first frame update
     void Start()
@@ -157,6 +156,11 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ChangeJumpCoroutine());
             GameObject effectClone = (GameObject)Instantiate(powerupEffect, transform.position, transform.rotation);
             effectClone.transform.parent = transform;
+        }
+        if (trigger.CompareTag("Win"))
+        {
+            win.gameObject.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
