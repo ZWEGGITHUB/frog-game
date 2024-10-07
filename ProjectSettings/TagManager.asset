@@ -7,7 +7,8 @@ TagManager:
   - Ball
   - Inverse
   - Reinverse
-  - Fly
+  - FlyBlack
+  - FlyGreen
   layers:
   - Default
   - TransparentFX

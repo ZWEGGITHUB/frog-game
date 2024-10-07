@@ -107,7 +107,6 @@ public class PlayerController : MonoBehaviour
                     nextAttackTime = Time.time + 1f / attackRate;
                 }
         }
-
     }
 
     private void FixedUpdate()
@@ -121,18 +120,61 @@ public class PlayerController : MonoBehaviour
         {
             fl.Flash();
             hitSound.Play();
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.MinusScore(100); 
+            }
             CinemachineShake.Instance.ShakeCamera(2f, 0.75f);
             GameObject effectClone = (GameObject)Instantiate(hitEffect, transform.position, transform.rotation);
             effectClone.transform.parent = transform;
         }
-
-        if(collision.gameObject.CompareTag("Fly"))
+    }
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        if (trigger.CompareTag("FlyBlack"))
         {
             eatSound.Play();
             CinemachineShake.Instance.ShakeCamera(1.5f, 0.5f);
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.AddScore(100); 
+            }
+            StartCoroutine(ChangeSpeedCoroutine());
             GameObject effectClone = (GameObject)Instantiate(powerupEffect, transform.position, transform.rotation);
             effectClone.transform.parent = transform;
         }
+        if (trigger.CompareTag("FlyGreen"))
+        {
+            eatSound.Play();
+            CinemachineShake.Instance.ShakeCamera(1.5f, 0.5f);
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.AddScore(100); 
+            }
+            StartCoroutine(ChangeJumpCoroutine());
+            GameObject effectClone = (GameObject)Instantiate(powerupEffect, transform.position, transform.rotation);
+            effectClone.transform.parent = transform;
+        }
+    }
+
+    private IEnumerator ChangeSpeedCoroutine()
+    {
+        moveSpeed = 17f;
+
+        yield return new WaitForSeconds(10f);
+
+        moveSpeed = 10f;
+    }
+    private IEnumerator ChangeJumpCoroutine()
+    {
+        jumpForce = 37f;
+
+        yield return new WaitForSeconds(10f);
+
+        jumpForce = 25f;
     }
 
 }
