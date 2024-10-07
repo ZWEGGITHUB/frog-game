@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(jump) && isGrounded)
         {
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+            anim.SetTrigger("Jump");
             jumpSound.Play();
         } else {
             //theRB.velocity = new Vector2(theRB.velocity.x, 0);
@@ -102,13 +103,10 @@ public class PlayerController : MonoBehaviour
                     //bulletClone.transform.localScale = transform.localScale;       
                     anim.SetTrigger("Eat");
                     tongueSound.Play();
-                    CinemachineShake.Instance.ShakeCamera(0.4f, 0.1f);
+                    CinemachineShake.Instance.ShakeCamera(0.5f, 0.25f);
                     nextAttackTime = Time.time + 1f / attackRate;
                 }
         }
-
-        anim.SetFloat("Speed", Mathf.Abs(theRB.velocity.x));
-        anim.SetBool("Grounded", isGrounded);
 
     }
 
@@ -123,7 +121,7 @@ public class PlayerController : MonoBehaviour
         {
             fl.Flash();
             hitSound.Play();
-            CinemachineShake.Instance.ShakeCamera(2f, 0.5f);
+            CinemachineShake.Instance.ShakeCamera(2f, 0.75f);
             GameObject effectClone = (GameObject)Instantiate(hitEffect, transform.position, transform.rotation);
             effectClone.transform.parent = transform;
         }
@@ -131,7 +129,7 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Fly"))
         {
             eatSound.Play();
-            CinemachineShake.Instance.ShakeCamera(1f, 0.15f);
+            CinemachineShake.Instance.ShakeCamera(1.5f, 0.5f);
             GameObject effectClone = (GameObject)Instantiate(powerupEffect, transform.position, transform.rotation);
             effectClone.transform.parent = transform;
         }

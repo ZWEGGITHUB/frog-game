@@ -164,7 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 8
   inverse: 0
-  bulletEffect: {fileID: 0}
 --- !u!114 &5351199121532784861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,4 +176,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374d65f6549477c45b4cc36bc80b694f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 150
+  lifeTime: 110
